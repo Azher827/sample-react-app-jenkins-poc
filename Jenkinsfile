@@ -1,4 +1,4 @@
-def DOCKER_IMAGE_NAME="samsung-sds:5000/gitopspoc:v${CURRENT_BUILD}"
+def DOCKER_IMAGE_NAME="samsung-sds:5000/gitopspoc:v${BUILD_NUMBER}"
 pipeline {
     agent any
     stages
@@ -10,9 +10,9 @@ pipeline {
                 script
                 {
                     sh "npm install"
-                    sh "docker build -t samsung-sds:5000/gitopspoc:v${BUILD_NUMBER} ."
-                    sh "docker push samsung-sds:5000/gitopspoc:v${BUILD_NUMBER}"
-                    build job: 'update_gitops_repo_pipeline', parameters: [string(name: 'CURRENT_BUILD', value: '${BUILD_NUMBER}')]
+                    sh "docker build -t ${DOCKER_IMAGE_NAME} ."
+                    sh "docker push ${DOCKER_IMAGE_NAME}"
+                    build job: 'update_gitops_repo_pipeline', parameters: [string(name: 'CURRENT_BUILD', value: '${DOCKER_IMAGE_NAME}')]
                 }
             }
         }
