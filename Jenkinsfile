@@ -1,6 +1,9 @@
 def DOCKER_IMAGE_TAG="samsung-sds:5000/gitopspoc:v${BUILD_NUMBER}"
 pipeline {
     agent any
+    triggers {
+       pollSCM '* * * * *'
+    }
     stages
     {
         stage('Build: Code Repo')
