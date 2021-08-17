@@ -1,8 +1,5 @@
 def DOCKER_IMAGE_NAME="samsung-sds:5000/gitopspoc:v${CURRENT_BUILD}"
 pipeline {
-    parameters {
-      string 'CURRENT_BUILD'
-    }
     agent any
     stages
     {
